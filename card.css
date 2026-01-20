@@ -1,255 +1,45 @@
-/* Lithic Card Embed Styles */
-
-/* Base container styling */
-body {
-  margin: 0;
-  padding: 24px;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  background: linear-gradient(135deg, #1a1a2e 0%, #16213e 50%, #0f3460 100%);
-  min-height: 100vh;
-  box-sizing: border-box;
-}
-
-/* Card container */
 .card {
-  background: linear-gradient(145deg, #2d2d44 0%, #1a1a2e 100%);
-  border-radius: 16px;
-  padding: 24px;
+  display: grid;
+  grid-template-rows: 2fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
+  grid-template-areas: 
+    "header header"
+    "pan pan"
+    "expiry cvv";
+  box-sizing: border-box;
+  padding: 20px;
+  width: 280px;
+  height: 180px;
+  background:
+    white
+    url("https://lithic-web.s3.us-west-1.amazonaws.com/lithic-logo/lithic-logo.svg")
+    top 28px left 28px
+    no-repeat;
+  border-radius: 12px;
   box-shadow:
-    0 25px 50px -12px rgba(0, 0, 0, 0.5),
-    0 0 0 1px rgba(255, 255, 255, 0.1);
-  max-width: 400px;
-  margin: 0 auto;
+    0 0 0 1px rgba(0, 0, 0, 0.1),
+    0 6px 12px rgba(0, 0, 0, 0.1);
+  font: 14px/1.2 system-ui, sans-serif;
+  cursor: default;
 }
 
-/* Card header / chip area */
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-/* Card chip styling */
-.chip {
-  width: 48px;
-  height: 36px;
-  background: linear-gradient(135deg, #ffd700 0%, #b8860b 100%);
-  border-radius: 6px;
-  position: relative;
-}
-
-.chip::after {
-  content: '';
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 30px;
-  height: 24px;
-  border: 2px solid rgba(0, 0, 0, 0.2);
-  border-radius: 4px;
-}
-
-/* Card number styling */
 .pan,
-.card-number {
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', monospace;
-  font-size: 22px;
-  letter-spacing: 3px;
-  color: #ffffff;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
-  margin-bottom: 20px;
-  word-spacing: 8px;
-  cursor: pointer;
-  transition: color 0.2s ease;
-}
-
-.pan:hover,
-.card-number:hover {
-  color: #60a5fa;
-}
-
-/* CVV styling */
+.expiry,
 .cvv {
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', monospace;
-  font-size: 18px;
-  color: #ffffff;
-  cursor: pointer;
-  transition: color 0.2s ease;
+  grid-area: pan;
+  height: fit-content;
+  width: fit-content;
+  padding: 8px;
+  border-radius: 8px;
+  font-weight: bold;
+  letter-spacing: 0.1em;
+  transition: background 250ms;
 }
 
-.cvv:hover {
-  color: #60a5fa;
-}
-
-/* Expiry date styling */
-.exp,
 .expiry {
-  font-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Mono', 'Droid Sans Mono', monospace;
-  font-size: 16px;
-  color: #e5e5e5;
-  cursor: pointer;
-  transition: color 0.2s ease;
+  letter-spacing: 0;
+  grid-area: expiry;
 }
 
-.exp:hover,
-.expiry:hover {
-  color: #60a5fa;
-}
-
-/* Label styling */
-.label,
-label {
-  font-size: 10px;
-  text-transform: uppercase;
-  letter-spacing: 1.5px;
-  color: #9ca3af;
-  display: block;
-  margin-bottom: 4px;
-}
-
-/* Card footer with details */
-.card-footer,
-.card-details {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  gap: 24px;
-}
-
-/* Detail groups */
-.detail-group {
-  display: flex;
-  flex-direction: column;
-}
-
-/* Copy indicator styling */
-.copy-indicator,
-.copied {
-  font-size: 11px;
-  color: #22c55e;
-  margin-top: 4px;
-  opacity: 0;
-  transition: opacity 0.2s ease;
-}
-
-.copy-indicator.show,
-.copied.visible {
-  opacity: 1;
-}
-
-/* Clickable elements */
-[data-copy],
-.copyable {
-  cursor: pointer;
-  transition: all 0.2s ease;
-  padding: 4px 8px;
-  margin: -4px -8px;
-  border-radius: 4px;
-}
-
-[data-copy]:hover,
-.copyable:hover {
-  background: rgba(96, 165, 250, 0.1);
-}
-
-[data-copy]:active,
-.copyable:active {
-  background: rgba(96, 165, 250, 0.2);
-}
-
-/* Network logo area */
-.network-logo {
-  width: 60px;
-  height: 40px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-}
-
-/* Loading state */
-.loading {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  min-height: 200px;
-  color: #9ca3af;
-}
-
-/* Error state */
-.error {
-  color: #ef4444;
-  text-align: center;
-  padding: 24px;
-}
-
-/* Responsive adjustments */
-@media (max-width: 420px) {
-  body {
-    padding: 16px;
-  }
-
-  .card {
-    padding: 20px;
-  }
-
-  .pan,
-  .card-number {
-    font-size: 18px;
-    letter-spacing: 2px;
-  }
-
-  .cvv {
-    font-size: 16px;
-  }
-}
-
-/* Animation for copy feedback */
-@keyframes pulse {
-  0% { transform: scale(1); }
-  50% { transform: scale(1.02); }
-  100% { transform: scale(1); }
-}
-
-.copied-flash {
-  animation: pulse 0.2s ease;
-}
-
-/* Accessibility - focus states */
-[data-copy]:focus,
-.copyable:focus {
-  outline: 2px solid #60a5fa;
-  outline-offset: 2px;
-}
-
-/* Dark mode is default, but support light if needed */
-@media (prefers-color-scheme: light) {
-  body {
-    background: linear-gradient(135deg, #f0f0f5 0%, #e5e7eb 50%, #d1d5db 100%);
-  }
-
-  .card {
-    background: linear-gradient(145deg, #ffffff 0%, #f3f4f6 100%);
-    box-shadow:
-      0 25px 50px -12px rgba(0, 0, 0, 0.15),
-      0 0 0 1px rgba(0, 0, 0, 0.05);
-  }
-
-  .pan,
-  .card-number,
-  .cvv {
-    color: #1f2937;
-    text-shadow: none;
-  }
-
-  .exp,
-  .expiry {
-    color: #374151;
-  }
-
-  .label,
-  label {
-    color: #6b7280;
-  }
-}
+.cvv {
+  letter-spacing: 0;
